@@ -52,7 +52,7 @@ const el = {
 };
 
 const email = {
-  keyDown() {
+  keyUp() {
     let isEventListener = false;
 
     el.emailInput.addEventListener('keyup', (event) => {
@@ -85,7 +85,7 @@ const email = {
   }
 };
 
-const validate = {
+const validation = {
   preventDefaultOnAllForms() {
     for (let i = 0; i < el.formTags.length; i++) {
       el.formTags[i].addEventListener('submit', (event) => {
@@ -94,13 +94,13 @@ const validate = {
     }
   },
   init() {
-    validate.preventDefaultOnAllForms();
-    email.keyDown();
+    validation.preventDefaultOnAllForms();
+    email.keyUp();
   }
 };
 
 document.onreadystatechange = function () {
   if (document.readyState === 'interactive') {
-    validate.init();
+    validation.init();
   }
 };
