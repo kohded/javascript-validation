@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>JavaScript Validation</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/font-awesome.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/templatemo-style.css">
+  <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+  <!--[if lt IE 7]>
+  <p class="browsehappy">
+    You are using an <strong>outdated</strong> browser. Please
+    <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+  </p>
+  <![endif]-->
+
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+  </div>
+
+  <div class="content-bg"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="site-top">
+    <div class="site-header clearfix">
+      <div class="container">
+        <a href="#" class="site-brand pull-left"><strong>JavaScript</strong> Validation</a>
+      </div>
+    </div>
+    <div class="site-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-2 col-md-8 text-center">
+            <h2>Client-side validation in
+              <span class="blue">Java</span><span class="green">Script</span></h2>
+            <p>This presentation is on client-side validation in JavaScript with form input types.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-posts">
+    <div class="container">
+      <div class="row">
+        <div class="blog-masonry masonry-true">
+          <!--Color-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Color</div>
+                <div class="panel-body">
+                  <form id="color-form">
+                    <div class="form-group">
+                      <label for="color-input">Color</label>
+                      <input type="color" class="form-control" id="color-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="color-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Date-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Date</div>
+                <div class="panel-body">
+                  <form id="date-form">
+                    <div class="form-group">
+                      <label for="date-input">Date</label>
+                      <input type="date" class="form-control" id="date-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="date-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Datetime-local-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Datetime-local</div>
+                <div class="panel-body">
+                  <form id="datetime-local-form">
+                    <div class="form-group">
+                      <label for="datetime-local-input">Datetime-local</label>
+                      <input type="datetime-local" class="form-control" id="datetime-local-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="datetime-local-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Email-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Email</div>
+                <div class="panel-body">
+                  <form id="email-form">
+                    <div class="form-group">
+                      <label for="email-input">Email</label>
+                      <input type="email" class="form-control" id="email-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="email-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--File-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: File</div>
+                <div class="panel-body">
+                  <form id="file-form">
+                    <div class="form-group">
+                      <label for="file-input">File</label>
+                      <input type="file" class="form-control" id="file-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="file-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Month-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Month</div>
+                <div class="panel-body">
+                  <form id="month-form">
+                    <div class="form-group">
+                      <label for="month-input">Month</label>
+                      <input type="month" class="form-control" id="month-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="month-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Number-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Number</div>
+                <div class="panel-body">
+                  <form id="number-form">
+                    <div class="form-group">
+                      <label for="number-input">Number</label>
+                      <input type="number" class="form-control" id="number-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="number-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Password-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Password</div>
+                <div class="panel-body">
+                  <form id="password-form">
+                    <div class="form-group">
+                      <label for="password-input">Password</label>
+                      <input type="password" class="form-control" id="password-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="password-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Range-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Range</div>
+                <div class="panel-body">
+                  <form id="range-form">
+                    <div class="form-group">
+                      <label for="range-input">Range</label>
+                      <input type="range" class="form-control" id="range-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="range-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Tel-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Tel</div>
+                <div class="panel-body">
+                  <form id="tel-form">
+                    <div class="form-group">
+                      <label for="tel-input">Tel</label>
+                      <input type="tel" class="form-control" id="tel-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="tel-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Text-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Text</div>
+                <div class="panel-body">
+                  <form id="text-form">
+                    <div class="form-group">
+                      <label for="text-input">Text</label>
+                      <input type="text" class="form-control" id="text-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="text-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Time-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Time</div>
+                <div class="panel-body">
+                  <form id="time-form">
+                    <div class="form-group">
+                      <label for="time-input">Time</label>
+                      <input type="time" class="form-control" id="time-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="time-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--URL-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: URL</div>
+                <div class="panel-body">
+                  <form id="url-form">
+                    <div class="form-group">
+                      <label for="url-input">URL</label>
+                      <input type="url" class="form-control" id="url-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="url-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Week-->
+          <div class="post-masonry col-xs-12 col-sm-6 col-md-4">
+            <div class="post-thumb">
+              <div class="panel panel-default">
+                <div class="panel-heading">Type: Week</div>
+                <div class="panel-body">
+                  <form id="week-form">
+                    <div class="form-group">
+                      <label for="week-input">Week</label>
+                      <input type="week" class="form-control" id="week-input">
+                    </div>
+                    <button type="submit" class="btn pull-right">Submit</button>
+                  </form>
+                </div>
+                <div class="panel-footer">
+                  <p>Message: <strong id="week-message"></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="copyright-text">Copyright &copy; 2017 Arnold Koh | Chris Knoll</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/vendor/jquery-1.10.2.min.js"></script>
+  <script src="js/min/plugins.min.js"></script>
+  <script src="js/min/main.min.js"></script>
+
+  <!-- Preloader -->
+  <script type="text/javascript">
+    //<![CDATA[
+    $(window).load(function () { // makes sure the whole site is loaded
+      $('#loader').fadeOut(); // will first fade out the loading animation
+      $('#loader-wrapper').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+      $('body').delay(350).css({ 'overflow-y': 'visible' });
+    })
+    //]]>
+  </script>
+  <script src="js/validation.js"></script>
+
+</body>
+</html>
