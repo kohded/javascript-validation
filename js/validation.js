@@ -51,31 +51,56 @@ const el = {
   weekMessage: document.getElementById('week-message')
 };
 
+const date = {
+  init() {
+    // Event listener is for Chrome date picker if it's used first.
+    el.dateForm.addEventListener('submit', date.submit, false);
+    date.keyUp();
+  },
+  keyUp() {
+    el.dateInput.addEventListener('keyup', (event) => {
+      const dateInput = event.target.value;
+      const dateRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])$/;
+
+      if (dateRegex.test(dateInput)) {
+        el.dateForm.addEventListener('submit', date.submit, false);
+        el.dateMessage.innerHTML = 'Date valid';
+        el.dateMessage.style.color = 'blue';
+      }
+      else {
+        el.dateForm.removeEventListener('submit', date.submit, false);
+        el.dateMessage.innerHTML = 'Date invalid';
+        el.dateMessage.style.color = 'red';
+      }
+    });
+  },
+  submit(event) {
+    // Prevent form submission if date input is empty.
+    if (!event.target[0].value) {
+      return false;
+    }
+
+    el.dateMessage.innerHTML = 'Date submitted';
+    el.dateMessage.style.color = 'blue';
+    el.dateInput.value = '';
+  }
+};
+
 const email = {
   keyUp() {
-    let isEventListener = false;
-
     el.emailInput.addEventListener('keyup', (event) => {
       const emailInput = event.target.value;
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-      if (emailInput.match(emailRegex)) {
+      if (emailRegex.test(emailInput)) {
+        el.emailForm.addEventListener('submit', email.submit, false);
         el.emailMessage.innerHTML = 'Email valid';
         el.emailMessage.style.color = 'blue';
-
-        if (!isEventListener) {
-          el.emailForm.addEventListener('submit', email.submit, false);
-          isEventListener = true;
-        }
       }
       else {
+        el.emailForm.removeEventListener('submit', email.submit, false);
         el.emailMessage.innerHTML = 'Email invalid';
         el.emailMessage.style.color = 'red';
-
-        if (isEventListener) {
-          el.emailForm.removeEventListener('submit', email.submit, false);
-          isEventListener = false;
-        }
       }
     });
   },
@@ -95,6 +120,7 @@ const validation = {
   },
   init() {
     validation.preventDefaultOnAllForms();
+    date.init();
     email.keyUp();
   }
 };
