@@ -183,6 +183,30 @@ const month = {
   }
 };
 
+const number = {
+  keyUp() {
+    el.numberInput.addEventListener('keyup', (event) => {
+      const numberRegex = /^\d+$/;
+      const numberInput = event.target.value;
+
+      if (numberRegex.test(numberInput)) {
+        el.numberForm.addEventListener('submit', number.submit, false);
+        el.numberMessage.innerHTML = 'Number valid';
+        el.numberMessage.style.color = 'blue';
+      }
+      else {
+        el.numberForm.removeEventListener('submit', number.submit, false);
+        el.numberMessage.innerHTML = 'Number invalid';
+        el.numberMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.numberMessage.innerHTML = 'Number submitted';
+    el.numberInput.value = '';
+  }
+};
+
 const validation = {
   preventDefaultOnAllForms() {
     for (let i = 0; i < el.formTags.length; i++) {
@@ -197,6 +221,7 @@ const validation = {
     datetimeLocal.init();
     month.init();
     email.keyUp();
+    number.keyUp();
   }
 };
 
