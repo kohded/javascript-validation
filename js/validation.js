@@ -59,9 +59,9 @@ const date = {
   },
   keyUp() {
     el.dateInput.addEventListener('keyup', (event) => {
-      const dateInput = event.target.value;
-      // Format: yyyy-mm-ddThh:mm, Year range: 1900-2099
+      // Format: yyyy-mm-dd, Year range: 1900-2099
       const dateRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])$/;
+      const dateInput = event.target.value;
 
       if (dateRegex.test(dateInput)) {
         el.dateForm.addEventListener('submit', date.submit, false);
@@ -95,23 +95,24 @@ const datetimeLocal = {
   },
   keyUp() {
     el.datetimeLocalInput.addEventListener('keyup', (event) => {
-      const datetimeLocalInput = event.target.value;
       // Format: yyyy-mm-ddThh:mm, Year range: 1900-2099
       const datetimeLocalRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])T(0[0-9]|1[0-9]|2[0123]??):(0[0-9]|[12345][0-9])$/;
+      const datetimeLocalInput = event.target.value;
+
       if (datetimeLocalRegex.test(datetimeLocalInput)) {
         el.datetimeLocalForm.addEventListener('submit', datetimeLocal.submit, false);
-        el.datetimeLocalMessage.innerHTML = 'Date valid';
+        el.datetimeLocalMessage.innerHTML = 'Datetime-local valid';
         el.datetimeLocalMessage.style.color = 'blue';
       }
       else {
         el.datetimeLocalForm.removeEventListener('submit', datetimeLocal.submit, false);
-        el.datetimeLocalMessage.innerHTML = 'Date invalid';
+        el.datetimeLocalMessage.innerHTML = 'Datetime-local invalid';
         el.datetimeLocalMessage.style.color = 'red';
       }
     });
   },
   submit(event) {
-    // Prevent form submission if date input is empty.
+    // Prevent form submission if datetime-local input is empty.
     if (!event.target[0].value) {
       return false;
     }
@@ -125,8 +126,8 @@ const datetimeLocal = {
 const email = {
   keyUp() {
     el.emailInput.addEventListener('keyup', (event) => {
-      const emailInput = event.target.value;
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const emailInput = event.target.value;
 
       if (emailRegex.test(emailInput)) {
         el.emailForm.addEventListener('submit', email.submit, false);
@@ -146,6 +147,42 @@ const email = {
   }
 };
 
+const month = {
+  init() {
+    // Event listener is for Chrome date picker if it's used first.
+    el.monthForm.addEventListener('submit', month.submit, false);
+    month.keyUp();
+  },
+  keyUp() {
+    el.monthInput.addEventListener('keyup', (event) => {
+      // Format: yyyy-mm, Year range: 1900-2099
+      const monthRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])$/;
+      const monthInput = event.target.value;
+
+      if (monthRegex.test(monthInput)) {
+        el.monthForm.addEventListener('submit', month.submit, false);
+        el.monthMessage.innerHTML = 'Month valid';
+        el.monthMessage.style.color = 'blue';
+      }
+      else {
+        el.monthForm.removeEventListener('submit', month.submit, false);
+        el.monthMessage.innerHTML = 'Month invalid';
+        el.monthMessage.style.color = 'red';
+      }
+    });
+  },
+  submit(event) {
+    // Prevent form submission if month input is empty.
+    if (!event.target[0].value) {
+      return false;
+    }
+
+    el.monthMessage.innerHTML = 'Month submitted';
+    el.monthMessage.style.color = 'blue';
+    el.monthInput.value = '';
+  }
+};
+
 const validation = {
   preventDefaultOnAllForms() {
     for (let i = 0; i < el.formTags.length; i++) {
@@ -158,6 +195,7 @@ const validation = {
     validation.preventDefaultOnAllForms();
     date.init();
     datetimeLocal.init();
+    month.init();
     email.keyUp();
   }
 };
