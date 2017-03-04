@@ -150,23 +150,33 @@ const email = {
 
 const file = {
   upload() {
-    el.fileForm.addEventListener('submit', () => {
+    el.fileInput.addEventListener('change', () => {
       // File: .png|.jpg|.gif
       const fileRegex = /^([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif)$/;
 
-      if (!fileRegex.test(el.fileInput.value)) {
+      if (fileRegex.test(el.fileInput.files[0].name)) {
+        el.fileForm.addEventListener('submit', file.submit, false);
+        el.fileMessage.innerHTML = 'File valid';
+        el.fileMessage.style.color = 'blue';
+      }
+      else {
+        el.fileForm.removeEventListener('submit', file.submit, false);
         el.fileMessage.innerHTML = 'File invalid';
         el.fileMessage.style.color = 'red';
-
-        return false;
       }
-
-      el.fileMessage.innerHTML = 'File valid';
-      el.fileMessage.style.color = 'blue';
-      el.fileInput.value = '';
-
-      return true;
     });
+  },
+  submit() {
+    // Prevent form submission if file input is empty.
+    if (!el.fileInput.value) {
+      return false;
+    }
+
+    el.fileMessage.innerHTML = 'File submitted';
+    el.fileMessage.style.color = 'blue';
+    el.fileInput.value = '';
+
+    return true;
   }
 };
 
