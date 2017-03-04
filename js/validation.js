@@ -60,6 +60,7 @@ const date = {
   keyUp() {
     el.dateInput.addEventListener('keyup', (event) => {
       const dateInput = event.target.value;
+      // Format: yyyy-mm-ddThh:mm, Year range: 1900-2099
       const dateRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])$/;
 
       if (dateRegex.test(dateInput)) {
@@ -83,6 +84,41 @@ const date = {
     el.dateMessage.innerHTML = 'Date submitted';
     el.dateMessage.style.color = 'blue';
     el.dateInput.value = '';
+  }
+};
+
+const datetimeLocal = {
+  init() {
+    // Event listener is for Chrome date picker if it's used first.
+    el.datetimeLocalForm.addEventListener('submit', datetimeLocal.submit, false);
+    datetimeLocal.keyUp();
+  },
+  keyUp() {
+    el.datetimeLocalInput.addEventListener('keyup', (event) => {
+      const datetimeLocalInput = event.target.value;
+      // Format: yyyy-mm-ddThh:mm, Year range: 1900-2099
+      const datetimeLocalRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])T(0[0-9]|1[0-9]|2[0123]??):(0[0-9]|[12345][0-9])$/;
+      if (datetimeLocalRegex.test(datetimeLocalInput)) {
+        el.datetimeLocalForm.addEventListener('submit', datetimeLocal.submit, false);
+        el.datetimeLocalMessage.innerHTML = 'Date valid';
+        el.datetimeLocalMessage.style.color = 'blue';
+      }
+      else {
+        el.datetimeLocalForm.removeEventListener('submit', datetimeLocal.submit, false);
+        el.datetimeLocalMessage.innerHTML = 'Date invalid';
+        el.datetimeLocalMessage.style.color = 'red';
+      }
+    });
+  },
+  submit(event) {
+    // Prevent form submission if date input is empty.
+    if (!event.target[0].value) {
+      return false;
+    }
+
+    el.datetimeLocalMessage.innerHTML = 'Datetime-local submitted';
+    el.datetimeLocalMessage.style.color = 'blue';
+    el.datetimeLocalInput.value = '';
   }
 };
 
@@ -121,6 +157,7 @@ const validation = {
   init() {
     validation.preventDefaultOnAllForms();
     date.init();
+    datetimeLocal.init();
     email.keyUp();
   }
 };
