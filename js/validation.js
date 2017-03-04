@@ -51,6 +51,31 @@ const el = {
   weekMessage: document.getElementById('week-message')
 };
 
+const color = {
+  pick() {
+    el.colorInput.addEventListener('change', () => {
+      // Format: #000, #0000, #00000, #000000
+      const colorRegex = /^#[0-9a-f]{3,6}$/i;
+
+      if (colorRegex.test(el.colorInput.value)) {
+        el.colorForm.addEventListener('submit', color.submit, false);
+        el.colorMessage.innerHTML = 'Color valid';
+        el.colorMessage.style.color = 'blue';
+      }
+      else {
+        el.colorForm.removeEventListener('submit', color.submit, false);
+        el.colorMessage.innerHTML = 'Color invalid';
+        el.colorMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.colorMessage.innerHTML = 'Color submitted';
+    el.colorMessage.style.color = 'blue';
+    el.colorInput.value = '#000000';
+  }
+};
+
 const date = {
   init() {
     // Event listener is for Chrome date picker if it's used first.
@@ -250,6 +275,7 @@ const validation = {
   },
   init() {
     validation.preventDefaultOnAllForms();
+    color.pick();
     date.init();
     datetimeLocal.init();
     email.keyUp();
