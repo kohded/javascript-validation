@@ -58,12 +58,11 @@ const date = {
     date.keyUp();
   },
   keyUp() {
-    el.dateInput.addEventListener('keyup', (event) => {
+    el.dateInput.addEventListener('keyup', () => {
       // Format: yyyy-mm-dd, Year range: 1900-2099
       const dateRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])$/;
-      const dateInput = event.target.value;
 
-      if (dateRegex.test(dateInput)) {
+      if (dateRegex.test(el.dateInput.value)) {
         el.dateForm.addEventListener('submit', date.submit, false);
         el.dateMessage.innerHTML = 'Date valid';
         el.dateMessage.style.color = 'blue';
@@ -75,15 +74,17 @@ const date = {
       }
     });
   },
-  submit(event) {
+  submit() {
     // Prevent form submission if date input is empty.
-    if (!event.target[0].value) {
+    if (!el.dateInput.value) {
       return false;
     }
 
     el.dateMessage.innerHTML = 'Date submitted';
     el.dateMessage.style.color = 'blue';
     el.dateInput.value = '';
+
+    return true;
   }
 };
 
@@ -94,12 +95,11 @@ const datetimeLocal = {
     datetimeLocal.keyUp();
   },
   keyUp() {
-    el.datetimeLocalInput.addEventListener('keyup', (event) => {
+    el.datetimeLocalInput.addEventListener('keyup', () => {
       // Format: yyyy-mm-ddThh:mm, Year range: 1900-2099
       const datetimeLocalRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])T(0[0-9]|1[0-9]|2[0123]??):(0[0-9]|[12345][0-9])$/;
-      const datetimeLocalInput = event.target.value;
 
-      if (datetimeLocalRegex.test(datetimeLocalInput)) {
+      if (datetimeLocalRegex.test(el.datetimeLocalInput.value)) {
         el.datetimeLocalForm.addEventListener('submit', datetimeLocal.submit, false);
         el.datetimeLocalMessage.innerHTML = 'Datetime-local valid';
         el.datetimeLocalMessage.style.color = 'blue';
@@ -111,25 +111,26 @@ const datetimeLocal = {
       }
     });
   },
-  submit(event) {
+  submit() {
     // Prevent form submission if datetime-local input is empty.
-    if (!event.target[0].value) {
+    if (!el.datetimeLocalInput.value) {
       return false;
     }
 
     el.datetimeLocalMessage.innerHTML = 'Datetime-local submitted';
     el.datetimeLocalMessage.style.color = 'blue';
     el.datetimeLocalInput.value = '';
+
+    return true;
   }
 };
 
 const email = {
   keyUp() {
-    el.emailInput.addEventListener('keyup', (event) => {
+    el.emailInput.addEventListener('keyup', () => {
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      const emailInput = event.target.value;
 
-      if (emailRegex.test(emailInput)) {
+      if (emailRegex.test(el.emailInput.value)) {
         el.emailForm.addEventListener('submit', email.submit, false);
         el.emailMessage.innerHTML = 'Email valid';
         el.emailMessage.style.color = 'blue';
@@ -147,6 +148,28 @@ const email = {
   }
 };
 
+const file = {
+  upload() {
+    el.fileForm.addEventListener('submit', () => {
+      // File: .png|.jpg|.gif
+      const fileRegex = /^([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif)$/;
+
+      if (!fileRegex.test(el.fileInput.value)) {
+        el.fileMessage.innerHTML = 'File invalid';
+        el.fileMessage.style.color = 'red';
+
+        return false;
+      }
+
+      el.fileMessage.innerHTML = 'File valid';
+      el.fileMessage.style.color = 'blue';
+      el.fileInput.value = '';
+
+      return true;
+    });
+  }
+};
+
 const month = {
   init() {
     // Event listener is for Chrome date picker if it's used first.
@@ -154,12 +177,11 @@ const month = {
     month.keyUp();
   },
   keyUp() {
-    el.monthInput.addEventListener('keyup', (event) => {
+    el.monthInput.addEventListener('keyup', () => {
       // Format: yyyy-mm, Year range: 1900-2099
       const monthRegex = /^(19|20)\d\d(-)(0[1-9]|1[012])$/;
-      const monthInput = event.target.value;
 
-      if (monthRegex.test(monthInput)) {
+      if (monthRegex.test(el.monthInput.value)) {
         el.monthForm.addEventListener('submit', month.submit, false);
         el.monthMessage.innerHTML = 'Month valid';
         el.monthMessage.style.color = 'blue';
@@ -171,25 +193,26 @@ const month = {
       }
     });
   },
-  submit(event) {
+  submit() {
     // Prevent form submission if month input is empty.
-    if (!event.target[0].value) {
+    if (!el.monthInput.value) {
       return false;
     }
 
     el.monthMessage.innerHTML = 'Month submitted';
     el.monthMessage.style.color = 'blue';
     el.monthInput.value = '';
+
+    return true;
   }
 };
 
 const number = {
   keyUp() {
-    el.numberInput.addEventListener('keyup', (event) => {
+    el.numberInput.addEventListener('keyup', () => {
       const numberRegex = /^\d+$/;
-      const numberInput = event.target.value;
 
-      if (numberRegex.test(numberInput)) {
+      if (numberRegex.test(el.numberInput.value)) {
         el.numberForm.addEventListener('submit', number.submit, false);
         el.numberMessage.innerHTML = 'Number valid';
         el.numberMessage.style.color = 'blue';
@@ -219,8 +242,9 @@ const validation = {
     validation.preventDefaultOnAllForms();
     date.init();
     datetimeLocal.init();
-    month.init();
     email.keyUp();
+    file.upload();
+    month.init();
     number.keyUp();
   }
 };
