@@ -265,6 +265,168 @@ const number = {
   }
 };
 
+const password = {
+  keyUp() {
+    el.passwordInput.addEventListener('keyup', () => {
+      const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+
+      if (passwordRegex.test(el.passwordInput.value)) {
+        el.passwordForm.addEventListener('submit', password.submit, false);
+        el.passwordMessage.innerHTML = 'Password valid';
+        el.passwordMessage.style.color = 'blue';
+      }
+      else {
+        el.passwordForm.removeEventListener('submit', password.submit, false);
+        el.passwordMessage.innerHTML = 'Password invalid';
+        el.passwordMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.passwordMessage.innerHTML = 'Password submitted';
+    el.passwordInput.value = '';
+  }
+};
+
+const range = {
+  keyUp() {
+    el.rangeInput.addEventListener('keyup', () => {
+      const rangeRegex = /^\d+$/;
+
+      if (rangeRegex.test(el.rangeInput.value)) {
+        el.rangeForm.addEventListener('submit', range.submit, false);
+        el.rangeMessage.innerHTML = 'Range valid';
+        el.rangeMessage.style.color = 'blue';
+      }
+      else {
+        el.rangeForm.removeEventListener('submit', range.submit, false);
+        el.rangeMessage.innerHTML = 'Range invalid';
+        el.rangeMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.rangeMessage.innerHTML = 'Range submitted';
+    el.rangeInput.value = '';
+  }
+};
+
+const tel = {
+  keyUp() {
+    el.telInput.addEventListener('keyup', () => {
+      const telRegex = /^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+
+      if (telRegex.test(el.telInput.value)) {
+        el.telForm.addEventListener('submit', tel.submit, false);
+        el.telMessage.innerHTML = 'Telephone valid';
+        el.telMessage.style.color = 'blue';
+      }
+      else {
+        el.telForm.removeEventListener('submit', tel.submit, false);
+        el.telMessage.innerHTML = 'Telephone invalid';
+        el.telMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.telMessage.innerHTML = 'Telephone submitted';
+    el.telInput.value = '';
+  }
+};
+
+const text = {
+  keyUp() {
+    el.textInput.addEventListener('keyup', () => {
+      const textRegex = /^[a-zA-Z0-9,. -]{10,}$/;
+
+      if (textRegex.test(el.textInput.value)) {
+        el.textForm.addEventListener('submit', text.submit, false);
+        el.textMessage.innerHTML = 'Text valid';
+        el.textMessage.style.color = 'blue';
+      }
+      else {
+        el.textForm.removeEventListener('submit', text.submit, false);
+        el.textMessage.innerHTML = 'Text invalid';
+        el.textMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.textMessage.innerHTML = 'Text submitted';
+    el.textInput.value = '';
+  }
+};
+
+const time = {
+  keyUp() {
+    el.timeInput.addEventListener('keyup', () => {
+      const timeRegex = /(0[0-9]|1[0-9]|2[0123]??):(0[0-9]|[12345][0-9])$/;
+
+      if (timeRegex.test(el.timeInput.value)) {
+        el.timeForm.addEventListener('submit', time.submit, false);
+        el.timeMessage.innerHTML = 'Time valid';
+        el.timeMessage.style.color = 'blue';
+      }
+      else {
+        el.timeForm.removeEventListener('submit', time.submit, false);
+        el.timeMessage.innerHTML = 'Time invalid';
+        el.timeMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.timeMessage.innerHTML = 'Time submitted';
+    el.timeInput.value = '';
+  }
+};
+
+const url = {
+  keyUp() {
+    el.urlInput.addEventListener('keyup', () => {
+      const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+
+      if (urlRegex.test(el.urlInput.value)) {
+        el.urlForm.addEventListener('submit', url.submit, false);
+        el.urlMessage.innerHTML = 'URL valid';
+        el.urlMessage.style.color = 'blue';
+      }
+      else {
+        el.urlForm.removeEventListener('submit', url.submit, false);
+        el.urlMessage.innerHTML = 'URL invalid';
+        el.urlMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.urlMessage.innerHTML = 'URL submitted';
+    el.urlInput.value = '';
+  }
+};
+
+const week = {
+  keyUp() {
+    el.weekInput.addEventListener('keyup', () => {
+      // Format:  yyyy-Wdd  Where dd = 01 through 52 e.g. 1999-W52
+      const weekRegex = /^(19|20)\d\d(-W)(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-2])/;
+
+      if (weekRegex.test(el.weekInput.value)) {
+        el.weekForm.addEventListener('submit', week.submit, false);
+        el.weekMessage.innerHTML = 'Week valid';
+        el.weekMessage.style.color = 'blue';
+      }
+      else {
+        el.weekForm.removeEventListener('submit', week.submit, false);
+        el.weekMessage.innerHTML = 'Week invalid';
+        el.weekMessage.style.color = 'red';
+      }
+    });
+  },
+  submit() {
+    el.weekMessage.innerHTML = 'Week submitted';
+    el.weekInput.value = '';
+  }
+};
+
 const validation = {
   preventDefaultOnAllForms() {
     for (let i = 0; i < el.formTags.length; i++) {
@@ -282,6 +444,13 @@ const validation = {
     file.upload();
     month.init();
     number.keyUp();
+    password.keyUp();
+    range.keyUp();
+    tel.keyUp();
+    text.keyUp();
+    time.keyUp();
+    url.keyUp();
+    week.keyUp();
   }
 };
 
