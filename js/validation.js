@@ -31,9 +31,6 @@ const el = {
   passwordForm: document.getElementById('password-form'),
   passwordInput: document.getElementById('password-input'),
   passwordMessage: document.getElementById('password-message'),
-  rangeForm: document.getElementById('range-form'),
-  rangeInput: document.getElementById('range-input'),
-  rangeMessage: document.getElementById('range-message'),
   telForm: document.getElementById('tel-form'),
   telInput: document.getElementById('tel-input'),
   telMessage: document.getElementById('tel-message'),
@@ -288,29 +285,6 @@ const password = {
   }
 };
 
-const range = {
-  keyUp() {
-    el.rangeInput.addEventListener('keyup', () => {
-      const rangeRegex = /^\d+$/;
-
-      if (rangeRegex.test(el.rangeInput.value)) {
-        el.rangeForm.addEventListener('submit', range.submit, false);
-        el.rangeMessage.innerHTML = 'Range valid';
-        el.rangeMessage.style.color = 'blue';
-      }
-      else {
-        el.rangeForm.removeEventListener('submit', range.submit, false);
-        el.rangeMessage.innerHTML = 'Range invalid';
-        el.rangeMessage.style.color = 'red';
-      }
-    });
-  },
-  submit() {
-    el.rangeMessage.innerHTML = 'Range submitted';
-    el.rangeInput.value = '';
-  }
-};
-
 const tel = {
   keyUp() {
     el.telInput.addEventListener('keyup', () => {
@@ -445,7 +419,6 @@ const validation = {
     month.init();
     number.keyUp();
     password.keyUp();
-    range.keyUp();
     tel.keyUp();
     text.keyUp();
     time.keyUp();
